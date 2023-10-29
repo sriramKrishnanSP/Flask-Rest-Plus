@@ -1,0 +1,83 @@
+{% from "show_links.html" import show_edit_delete_links %}
+
+{% from "show_links.html" import show_add_todo_links %}
+
+{% from "show_links.html" import show_edit_delete_name %} 
+
+<html>
+    <head>
+       <title> TODO APP </title>
+       <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+    </head>
+    <body>
+        <h1> TODO APP  </h1>
+
+        <h4>
+            {% with messages = get_flashed_messages () %}
+                {% if messages %}
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </h4>
+
+
+        <!-- <p> <a href="{{url_for('add_New_Todo')}}"> Add TODO </a> </p> -->
+        {{ show_add_todo_links(user) }}
+        <br>
+        <p> <a href="{{url_for('get_overdue_todo')}}"> View OverDue </a> </p>
+        <br>
+        <p> <a href="{{url_for('get_finished_todo')}}"> View Finished </a> </p>
+        <br>
+        
+       
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>TASK</th>
+                <th> DUE_BY </th>
+                <th colspan="1">STATUS</th>
+                <!-- <th colspan="1">EDIT TODO</th>
+                <th colspan="1">DELETE TODO</th> -->
+                {{ show_edit_delete_name(user) }}
+
+            </tr>
+            {% for value in data %}
+                <tr>
+                    <td>{{value.id}}</td>
+                    <td>{{value.task}}</td>
+                    <td><a href="{{url_for('get_Todo_By_Due_By',due_date=value.due_date)}}"> {{value.due_date}} </a></td>
+                    <!-- <td>{{value.due_date}}</td> -->
+                    <td>{{value.status}}</td>
+
+                    <!-- <td><a href="{{url_for('edit_Todo',task_id=value.id)}}"> Edit </a></td>
+                    <td><a onclick="return confirm ('Are you sure to delete?');" href="{{url_for('delete_Todo',task_id=value.id)}}"> Delete </a></td> -->
+
+                    {{ show_edit_delete_links(value,user) }}
+
+                </tr>
+            {% endfor %}
+
+        </table>
+
+
+        <div class="container">
+            <!-- Logout button -->
+            <div class="logout-button-container">
+                <button class="logout-button" onclick="window.location.href='/logout'">Logout</button>
+            </div>
+            
+            <div class="welcome">
+                <!-- <h2>Welcome {{user}} !</h2> -->
+                {% if user %}
+                    <h2>Welcome {{user[1]}} !</h2>
+                {% endif %}
+
+
+            </div>
+        </div>
+
+
+    </body>
+</html>

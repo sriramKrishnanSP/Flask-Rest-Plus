@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <title>Update TODO</title>
+        <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+    </head>
+    <body>
+        <h1>Update TODO Item</h1>
+        <form action='' method='POST'>
+            <label>Task:</label>
+            <input type="text" name="task" value="{{data.task}}" required>
+            <label>Due_Date:</label>
+            <input type="date" name="due_date" value="{{data.due_date}}" required>
+            <label>Status: </label>
+            <!-- <input type="text" name="status"  value="{{data.status}}" required> -->
+            <select name="status">
+                <!-- <option value="">Select</option>
+                <option value="Not started" >Not started</option>
+                <option value="In progress">In progress</option>
+                <option value="Finished">Finished</option> -->
+                
+                <option value="Not started" {% if data.status == "Not started" %}selected{% endif %}>Not started</option>
+                <option value="In progress" {% if data.status == "In progress" %}selected{% endif %}>In progress</option>
+                <option value="Finished" {% if data.status == "Finished" %}selected{% endif %}>Finished</option>
+            </select>
+            <input type='submit' value='Update Details'>
+        </form>
+        <div class="container">
+            <!-- Logout button -->
+            <div class="logout-button-container">
+                <button class="logout-button" onclick="window.location.href='/logout'">Logout</button>
+            </div>
+          
+        </div>
+
+    </body>
+</html>

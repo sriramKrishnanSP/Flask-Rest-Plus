@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>Add TODO</title>
+        <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+    </head>
+    <body>
+        <h1>Add New TODO Item</h1>
+        <form action='' method='POST'>
+            <label>Task:</label>
+            <input type="text" name="task" required>
+            <label>Due_Date:</label>
+            <input type="date" name="due_date" required>
+            <label>Status: </label>
+            <!-- <input type="text" name="status" required> -->
+            <select name="status" required>
+                <option value="">Select</option>
+                <option value="Not started">Not started</option>
+                <option value="In progress">In progress</option>
+                <option value="Finished">Finished</option>
+            </select>
+            <input type='submit' value='Save Details'>
+        </form>
+        <div class="container">
+            <!-- Logout button -->
+            <div class="logout-button-container">
+                <button class="logout-button" onclick="window.location.href='/logout'">Logout</button>
+            </div>
+            
+            
+        </div>
+
+    </body>
+</html>
